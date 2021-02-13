@@ -86,7 +86,7 @@ private:
 	std::shared_ptr<Preset<Value, Key>> addToGroup(const GroupKey &key, std::shared_ptr<Preset<Value, Key>> preset) {
 		auto result = presets_.insert(std::make_pair(key, preset));
 		if(result.second) {
-			PresetGroup::add(*preset);
+			PresetGroup<Key>::add(*preset);
 		}
 		return preset;
 	}
