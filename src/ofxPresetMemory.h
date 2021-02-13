@@ -21,6 +21,10 @@ public:
 	bool set(const Key &key, Value value) {
 		return storage_.insert(std::make_pair(key, value)).second;
 	}
+	template<typename ...Args>
+	bool set(const Key &key, Args &&...args) {
+		return set(key, Value{std::forward<Args>(args)...});
+	}
 	Value& get() {
 		return ref_;
 	}
