@@ -1,6 +1,5 @@
 # ofxPresetMemory
 
-
 ```
 ofxPresetMemory preset_;
 int test_;
@@ -40,3 +39,48 @@ void ofApp::keyPressed(int key){
 }
 
 ```
+
+## API
+
+### ofxPreset
+
+It holds one set of presets for a value or reference.  
+If you have this;
+```
+ofxPreset<int> preset(0);
+``` 
+You can set values by like;
+```
+preset.set("one", 1);
+preset.set("fake prime", 57);
+```
+You can get the value by;
+```
+preset.get("one"); // 1
+preset("fake prime"); // 57
+```
+Or
+```
+preset.update("one");
+preset.get(); // 1
+preset.update("fake prime");
+preset.get(); // 57
+```
+Or if you create ofxPreset by a lvalue reference like this;
+```
+int value = 0;
+ofxPreset<int>(value);
+```
+And add presets in same way;
+```
+preset.set("one", 1);
+preset.set("fake prime", 57);
+```
+You can get these values directly via `value`;
+```
+preset.update("one");
+value; // 1
+preset.update("fake prime");
+value; // 57
+```
+
