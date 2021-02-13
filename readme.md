@@ -49,7 +49,7 @@ If you have this;
 ```
 ofxPreset<int> preset(0);
 ``` 
-You can set values by like;
+You can set values like;
 ```
 preset.set("one", 1);
 preset.set("fake prime", 57);
@@ -84,3 +84,31 @@ preset.update("fake prime");
 value; // 57
 ```
 
+### ofxPresetMemory
+
+It manages multiple preset values in one instance.  
+When you have;
+```
+ofxPresetMemory preset;
+```
+You can create ofxPreset instance by either lvalue or rvalue;
+```
+// lvalue example
+int value;
+auto intarg = preset.add("some int arg", value);
+// rvalue example
+auto vec2arg = preset.add("some vec2 arg", 0, 0);
+```
+And if you add values with same key through args;
+```
+intarg.set("preset 1", 10);
+vec2arg.set("preset 1", 20, 30);
+```
+You can retrieve them by;
+```
+preset.update("preset 1");
+int i = preset.get("some int arg");	// 10
+auto v = preset.get<glm::vec2>("some vec2 arg"); // {20, 30}
+// or since you added `int value' as lvalue, you can get it directly;
+value; // 10
+```
